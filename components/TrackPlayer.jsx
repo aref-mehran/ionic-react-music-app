@@ -1,18 +1,42 @@
 import React, { useCallback, useContext } from 'react';
 
 import {
-  IonModal, IonHeader, IonToolbar, IonTitle, IonContent, IonRange,
-  IonButtons, IonButton, IonIcon 
+  IonModal,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonRange,
+  IonButtons,
+  IonButton,
+  IonIcon,
 } from '@ionic/react';
 
 import {
-  arrowDown, heart, heartOutline, playSkipBack,
-  play, pause, playSkipForward, removeCircleOutline
+  arrowDown,
+  heart,
+  heartOutline,
+  playSkipBack,
+  play,
+  pause,
+  playSkipForward,
+  removeCircleOutline,
 } from 'ionicons/icons';
 
 import {
-  AppContext, isPlayerOpen, closePlayer, getPlaying, getCurrentTrack, isFavTrack, 
-favTrack, pauseTrack, playTrack, seekTrack, nextTrack, prevTrack } from '../State';
+  AppContext,
+  isPlayerOpen,
+  closePlayer,
+  getPlaying,
+  getCurrentTrack,
+  isFavTrack,
+  favTrack,
+  pauseTrack,
+  playTrack,
+  seekTrack,
+  nextTrack,
+  prevTrack,
+} from '../State';
 
 import { img, msToTime } from '../util';
 
@@ -26,41 +50,46 @@ const TrackProgress = ({ playing, track, onSeek }) => {
   const s = (p) => {
     const newTime = (p / 100) * track.time;
     onSeek(newTime);
-  }
+  };
   return (
-  <div className="track-progress">
-    <IonRange
-      value={percent}
-      onIonChange={(e) => { s(e.target.value)}} />
-    <div className="track-progress-time">
-      <div className="track-progress-time-current">
-        {msToTime(progress)}
-      </div>
-      <div className="track-progress-time-left">
-        -{msToTime(left)}
+    <div className="track-progress">
+      <IonRange
+        value={percent}
+        onIonChange={(e) => {
+          s(e.target.value);
+        }}
+      />
+      <div className="track-progress-time">
+        <div className="track-progress-time-current">{msToTime(progress)}</div>
+        <div className="track-progress-time-left">-{msToTime(left)}</div>
       </div>
     </div>
-  </div>
-  )
+  );
 };
 
-const TrackControls = ({ playing, isFav, onPause, onPlay, onPrev, onNext, onFav }) => {
+const TrackControls = ({
+  playing,
+  isFav,
+  onPause,
+  onPlay,
+  onPrev,
+  onNext,
+  onFav,
+}) => {
   return (
-  <div className="track-controls">
-    <IonIcon onClick={onFav} icon={isFav ? heart : heartOutline} />
-    <IonIcon onClick={onPrev} icon={playSkipBack} />
-    {playing.paused ? (
-      <IonIcon onClick={onPlay} className="play-pause" icon={play} />
-    ): (
-      <IonIcon onClick={onPause} className="play-pause" icon={pause} />
-    )}
-    <IonIcon onClick={onNext} icon={playSkipForward} />
-    <IonIcon icon={removeCircleOutline} />
-  </div>
+    <div className="track-controls">
+      <IonIcon onClick={onFav} icon={isFav ? heart : heartOutline} />
+      <IonIcon onClick={onPrev} icon={playSkipBack} />
+      {playing.paused ? (
+        <IonIcon onClick={onPlay} className="play-pause" icon={play} />
+      ) : (
+        <IonIcon onClick={onPause} className="play-pause" icon={pause} />
+      )}
+      <IonIcon onClick={onNext} icon={playSkipForward} />
+      <IonIcon icon={removeCircleOutline} />
+    </div>
   );
-}
-
-
+};
 
 const TrackPlayer = ({ track, closed }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -80,10 +109,7 @@ const TrackPlayer = ({ track, closed }) => {
   }, [dispatch, closePlayer]);
 
   return (
-    <IonModal
-      isOpen={open}
-      onDidDismiss={handleClose}
-      className="track-player">
+    <IonModal isOpen={open} onDidDismiss={handleClose} className="track-player">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -91,19 +117,20 @@ const TrackPlayer = ({ track, closed }) => {
               <IonIcon icon={arrowDown} />
             </IonButton>
           </IonButtons>
-          <IonTitle>
-            {currentTrack.title}
-          </IonTitle>
+          <IonTitle>{currentTrack.title}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="track-content">
         <img src={img(currentTrack.img)} />
         <h2>{currentTrack.title}</h2>
         <h4>{currentTrack.artist}</h4>
+
+        <audio controls loop src={currentTrack.src} />
         <TrackProgress
           playing={playing}
           track={currentTrack}
-          onSeek={(n) => dispatch(seekTrack(n))} />
+          onSeek={(n) => dispatch(seekTrack(n))}
+        />
         <TrackControls
           playing={playing}
           track={currentTrack}
@@ -113,10 +140,10 @@ const TrackPlayer = ({ track, closed }) => {
           onPrev={() => dispatch(prevTrack())}
           onNext={() => dispatch(nextTrack())}
           onFav={() => dispatch(favTrack(track))}
-          />
+        />
       </IonContent>
     </IonModal>
-  )
+  );
 };
 
 export default TrackPlayer;
