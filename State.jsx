@@ -179,6 +179,7 @@ const initialState = {
         artist: 'The Beatles',
         img: 'music/hey-jude.jpg',
         src: 'https://dl.musicdel.ir/Music/1400/05/bruno_mars_count_on%20me%20128.mp3',
+        time: 411000,
       },
     ],
     hotTracks: ['0', '1', '2', '3'],

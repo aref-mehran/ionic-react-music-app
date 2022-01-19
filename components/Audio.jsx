@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 
-import { AppContext, getPlaying, seekTrack } from "../State";
+import { AppContext, getPlaying, seekTrack } from '../State';
 
 // A really naive fake play routine
 const Audio = () => {
@@ -8,21 +8,22 @@ const Audio = () => {
 
   const [handle, setHandle] = useState(null);
 
-  useEffect(() => {
-    const playing = getPlaying(state);
-    let h;
-    if (playing && !playing.paused) {
-      clearTimeout(h);
-      h = setTimeout(() => {
-        dispatch(seekTrack(Math.floor(playing.progress + 1000)));
-      }, 1000);
-      setHandle(h);
-    }
+  // useEffect(() => {
+  //   const playing = getPlaying(state);
+  //   let h;
+  //   console.log(state.playing);
+  //   if (playing && !playing.paused) {
+  //     clearTimeout(h);
+  //     h = setTimeout(() => {
+  //       dispatch(seekTrack(Math.floor(playing.progress + 1000)));
+  //     }, 1000);
+  //     setHandle(h);
+  //   }
 
-    return () => {
-      clearTimeout(h);
-    };
-  }, [state.playing]);
+  //   return () => {
+  //     clearTimeout(h);
+  //   };
+  // }, [state.playing]);
 
   return null;
 };
