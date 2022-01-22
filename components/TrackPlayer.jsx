@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useEffect } from 'react';
+import React, { useCallback, useContext, useRef, useEffect } from "react";
 
 import {
   IonModal,
@@ -9,8 +9,8 @@ import {
   IonRange,
   IonButtons,
   IonButton,
-  IonIcon,
-} from '@ionic/react';
+  IonIcon
+} from "@ionic/react";
 
 import {
   arrowDown,
@@ -20,8 +20,8 @@ import {
   play,
   pause,
   playSkipForward,
-  removeCircleOutline,
-} from 'ionicons/icons';
+  removeCircleOutline
+} from "ionicons/icons";
 
 import {
   AppContext,
@@ -35,12 +35,12 @@ import {
   playTrack,
   seekTrack,
   nextTrack,
-  prevTrack,
-} from '../State';
+  prevTrack
+} from "../State";
 
-import { img, msToTime } from '../util';
+import { img, msToTime } from "../util";
 
-import './TrackPlayer.css';
+import "./TrackPlayer.css";
 
 const TrackProgress = ({ playing, track, onSeek }) => {
   const progress = playing.progress;
@@ -74,7 +74,7 @@ const TrackControls = ({
   onPlay,
   onPrev,
   onNext,
-  onFav,
+  onFav
 }) => {
   return (
     <div className="track-controls">
@@ -109,16 +109,16 @@ const TrackPlayer = ({ track, closed }) => {
   }, [dispatch, closePlayer]);
 
   useEffect(() => {
-    let intervalId = setInterval((audioRef) => {
-      console.log(audioRef);
-      // dispatch(seekTrack(time));
+    clearTimeout(state.playing.intervalId);
+    state.playing.intervalId = setInterval(() => {
+      console.log(audioRef?.current?.currentTime);
+      dispatch(seekTrack(audioRef?.current?.currentTime * 1000));
     }, 1000);
 
     return () => {
-      clearTimeout(h);
+      // alert("unmounted");
     };
   }, []);
-
   return (
     <IonModal isOpen={open} onDidDismiss={handleClose} className="track-player">
       <IonHeader>

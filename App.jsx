@@ -1,25 +1,25 @@
-import React from 'react';
+import React from "react";
 
 /* Theme variables */
-import './theme/variables.css';
+import "./theme/variables.css";
 
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonPage } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+import { Redirect, Route } from "react-router-dom";
+import { IonApp, IonRouterOutlet, IonPage } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
 
-import { home, informationCircle, person, search } from 'ionicons/icons';
+import { home, informationCircle, person, search } from "ionicons/icons";
 
-import { AppContextProvider } from './State';
+import { AppContextProvider } from "./State";
 
-import urls from './urls';
+import urls from "./urls";
 
-import Tabs from './Tabs';
-import Login from './pages/Login';
-import ResetPassword from './pages/ResetPassword';
-import Signup from './pages/Signup';
+import Tabs from "./Tabs";
+import Login from "./pages/Login";
+import ResetPassword from "./pages/ResetPassword";
+import Signup from "./pages/Signup";
 
-import Audio from './components/Audio';
-import TrackPlayer from './components/TrackPlayer';
+import Audio from "./components/Audio";
+import TrackPlayer from "./components/TrackPlayer";
 
 const App = () => {
   return (

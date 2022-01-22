@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /**
  * This is a simple redux-like state management pattern for React using hooks
@@ -20,25 +20,25 @@ const reducer = (state, action) => {
   const user = getUser(state);
 
   switch (action.type) {
-    case 'SET_PLAYER_OPEN': {
+    case "SET_PLAYER_OPEN": {
       return {
         ...state,
         ui: {
           ...state.ui,
-          playerOpen: action.open,
-        },
+          playerOpen: action.open
+        }
       };
     }
-    case 'PAUSE': {
+    case "PAUSE": {
       return {
         ...state,
         playing: {
           ...playing,
-          paused: true,
-        },
+          paused: true
+        }
       };
     }
-    case 'PLAY': {
+    case "PLAY": {
       if (action.track && action.track !== ct) {
         const newRecentTracks = getRecentTracks(state).filter(
           (t) => t.id !== action.track.id
@@ -47,56 +47,56 @@ const reducer = (state, action) => {
         return {
           ...state,
           ui: {
-            playerOpen: true,
+            playerOpen: true
           },
           user: {
             ...user,
-            recentTracks: [action.track, ...newRecentTracks],
+            recentTracks: [action.track, ...newRecentTracks]
           },
           playing: {
             ...playing,
             index,
             progress: 0,
-            paused: false,
-          },
+            paused: false
+          }
         };
       }
       return {
         ...state,
         playing: {
           ...playing,
-          paused: false,
-        },
+          paused: false
+        }
       };
     }
-    case 'SEEK': {
+    case "SEEK": {
       return {
         ...state,
         playing: {
           ...playing,
-          progress: action.time <= ct.time ? Math.floor(action.time) : ct.time,
-        },
+          progress: action.time <= ct.time ? Math.floor(action.time) : ct.time
+        }
       };
     }
-    case 'NEXT': {
+    case "NEXT": {
       return {
         ...state,
         playing: {
           index: (playing.index + 1) % getTracks(state).length,
-          progress: 0,
-        },
+          progress: 0
+        }
       };
     }
-    case 'PREV': {
+    case "PREV": {
       return {
         ...state,
         playing: {
           index: Math.max(0, state.playing.index - 1),
-          progress: 0,
-        },
+          progress: 0
+        }
       };
     }
-    case 'FAV': {
+    case "FAV": {
       const isFav = isFavTrack(state, action.track);
       const newFavs = getFavTracks(state).filter(
         (t) => t.id !== action.track.id
@@ -105,28 +105,28 @@ const reducer = (state, action) => {
         ...state,
         user: {
           ...user,
-          favTracks: !isFav ? [ct, ...newFavs] : newFavs,
-        },
+          favTracks: !isFav ? [ct, ...newFavs] : newFavs
+        }
       };
     }
-    case 'LOGOUT': {
+    case "LOGOUT": {
       return {
         ...state,
         playing: null,
         auth: {
           ...state.auth,
-          user: null,
-        },
+          user: null
+        }
       };
     }
-    case 'LOGGED_IN':
+    case "LOGGED_IN":
       {
         return {
           ...state,
           auth: {
             ...state.auth,
-            user: action.user,
-          },
+            user: action.user
+          }
         };
       }
 
@@ -137,14 +137,14 @@ const reducer = (state, action) => {
 const logger = (reducer) => {
   const reducerWithLogger = (state, action) => {
     console.log(
-      '%cPrevious State:',
-      'color: #9E9E9E; font-weight: 700;',
+      "%cPrevious State:",
+      "color: #9E9E9E; font-weight: 700;",
       state
     );
-    console.log('%cAction:', 'color: #00A7F7; font-weight: 700;', action);
+    console.log("%cAction:", "color: #00A7F7; font-weight: 700;", action);
     console.log(
-      '%cNext State:',
-      'color: #47B04B; font-weight: 700;',
+      "%cNext State:",
+      "color: #47B04B; font-weight: 700;",
       reducer(state, action)
     );
     return reducer(state, action);
@@ -160,36 +160,38 @@ const initialState = {
     index: 0,
     progress: 27000,
     paused: false,
+    intervalId: null
   },
   auth: {
-    user: null,
+    user: null
   },
   user: {
     recentTracks: [],
-    favTracks: [],
+    favTracks: []
   },
   ui: {
-    playerOpen: false,
+    playerOpen: false
   },
   music: {
     tracks: [
       {
-        id: '0',
-        title: 'Count on you',
-        artist: 'The Beatles',
-        img: 'music/hey-jude.jpg',
-        src: 'https://dl.musicdel.ir/Music/1400/05/bruno_mars_count_on%20me%20128.mp3',
-        time: 411000,
-      },
+        id: "0",
+        title: "Count on you",
+        artist: "The Beatles",
+        img: "music/hey-jude.jpg",
+        src:
+          "https://dl.musicdel.ir/Music/1400/05/bruno_mars_count_on%20me%20128.mp3",
+        time: 411000
+      }
     ],
-    hotTracks: ['0', '1', '2', '3'],
-    newTracks: ['4', '5', '6', '7'],
-  },
+    hotTracks: ["0", "1", "2", "3"],
+    newTracks: ["4", "5", "6", "7"]
+  }
 };
 
 export function AppContextProvider(props) {
   const fullInitialState = {
-    ...initialState,
+    ...initialState
   };
 
   let [state, dispatch] = React.useReducer(reducer, fullInitialState);
@@ -204,49 +206,49 @@ export const AppContextConsumer = AppContext.Consumer;
 
 // Some state action creators
 export const openPlayer = () => ({
-  type: 'SET_PLAYER_OPEN',
-  open: true,
+  type: "SET_PLAYER_OPEN",
+  open: true
 });
 
 export const closePlayer = () => ({
-  type: 'SET_PLAYER_OPEN',
-  open: false,
+  type: "SET_PLAYER_OPEN",
+  open: false
 });
 
 export const pauseTrack = () => ({
-  type: 'PAUSE',
+  type: "PAUSE"
 });
 
 export const playTrack = (track) => ({
-  type: 'PLAY',
-  track,
+  type: "PLAY",
+  track
 });
 
 export const seekTrack = (time) => ({
-  type: 'SEEK',
-  time,
+  type: "SEEK",
+  time
 });
 
 export const nextTrack = () => ({
-  type: 'NEXT',
+  type: "NEXT"
 });
 
 export const prevTrack = () => ({
-  type: 'PREV',
+  type: "PREV"
 });
 
 export const favTrack = (track) => ({
-  type: 'FAV',
-  track,
+  type: "FAV",
+  track
 });
 
 export const logout = () => ({
-  type: 'LOGOUT',
+  type: "LOGOUT"
 });
 
 export const loggedIn = (user) => ({
-  type: 'LOGGED_IN',
-  user,
+  type: "LOGGED_IN",
+  user
 });
 
 // Some state selectors
