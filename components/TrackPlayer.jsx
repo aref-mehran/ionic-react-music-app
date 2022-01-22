@@ -93,7 +93,6 @@ const TrackControls = ({
 
 const TrackPlayer = ({ track, closed }) => {
   const { state, dispatch } = useContext(AppContext);
-  const audioRef = useRef(null);
   const playing = getPlaying(state);
 
   if (!playing) {
@@ -108,17 +107,6 @@ const TrackPlayer = ({ track, closed }) => {
     dispatch(closePlayer());
   }, [dispatch, closePlayer]);
 
-  useEffect(() => {
-    clearTimeout(state.playing.intervalId);
-    state.playing.intervalId = setInterval(() => {
-      console.log(audioRef?.current?.currentTime);
-      dispatch(seekTrack(audioRef?.current?.currentTime * 1000));
-    }, 1000);
-
-    return () => {
-      // alert("unmounted");
-    };
-  }, []);
   return (
     <IonModal isOpen={open} onDidDismiss={handleClose} className="track-player">
       <IonHeader>
@@ -136,21 +124,14 @@ const TrackPlayer = ({ track, closed }) => {
         <h2>{currentTrack.title}</h2>
         <h4>{currentTrack.artist}</h4>
 
-        <audio
-          ref={audioRef}
-          id="playerId"
-          onPlay={(time) => {
-            console.log(time);
-            dispatch(seekTrack(time));
-          }}
-          controls
-          loop
-          src={currentTrack.src}
-        />
         <TrackProgress
           playing={playing}
           track={currentTrack}
-          onSeek={(n) => dispatch(seekTrack(n))}
+          onSeek={(n) => {
+            state.playing.sliding = true;
+            dispatch(seekTrack(n));
+            state.playing.sliding = false;
+          }}
         />
         <TrackControls
           playing={playing}

@@ -160,7 +160,8 @@ const initialState = {
     index: 0,
     progress: 27000,
     paused: false,
-    intervalId: null
+    intervalId: null,
+    sliding: false
   },
   auth: {
     user: null

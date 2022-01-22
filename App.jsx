@@ -18,7 +18,7 @@ import Login from "./pages/Login";
 import ResetPassword from "./pages/ResetPassword";
 import Signup from "./pages/Signup";
 
-import Audio from "./components/Audio";
+import HiddenAudio from "./components/Audio";
 import TrackPlayer from "./components/TrackPlayer";
 
 const App = () => {
@@ -42,7 +42,7 @@ const App = () => {
               />
             </IonRouterOutlet>
             <Route path="/app" component={Tabs} />
-            <Audio />
+            <HiddenAudio />
             <TrackPlayer />
           </IonPage>
         </IonReactRouter>
