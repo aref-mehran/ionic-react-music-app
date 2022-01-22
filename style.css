@@ -1,9 +1,10 @@
-@import "~@ionic/react/css/ionic.bundle.css";
+@import "./ionic.bundle.css";
 
-h1, p {
+h1,
+p {
   font-family: Lato;
 }
 
 .datepicker {
-  height: 100px
+  height: 100px;
 }
