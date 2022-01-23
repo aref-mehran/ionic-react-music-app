@@ -181,12 +181,15 @@ const TrackPlayer = ({ track, closed }) => {
           {currentTrack?.lyric?.map((obj, idx) => {
             return (
               <ion-item key={idx} id={"item" + idx}>
-                <ion-avatar slot="start">
+                {/* <ion-avatar slot="start">
                   <img src={img(currentTrack.img)} />
-                </ion-avatar>
-                <ion-label>
-                  <h2>Finn</h2>
-                  <h3>{obj.sentence}</h3>
+                </ion-avatar> */}
+                <ion-label style={{ whiteSpace: "normal" }}>
+                  {lyric_curr_index === idx ? (
+                    <h2>{obj.sentence}</h2>
+                  ) : (
+                    <h3>{obj.sentence}</h3>
+                  )}
 
                   <p>
                     {lyric_curr_index === idx
