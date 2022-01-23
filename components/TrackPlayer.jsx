@@ -93,6 +93,37 @@ const TrackControls = ({
 
 const TrackPlayer = ({ track, closed }) => {
   const { state, dispatch } = useContext(AppContext);
+
+  const [lyric_curr_index, set_lyric_curr_index] = React.useState(0);
+
+  const setCurrentLyric = (tempTime) => {
+    const currentTrack = getCurrentTrack(state);
+
+    let index = 0;
+
+    let lyric_time_arr = currentTrack.lyric.map((data) => {
+      return data.seek_time;
+    });
+
+    if (lyric_time_arr.indexOf(tempTime) === -1) {
+      index =
+        [...lyric_time_arr, tempTime].sort((a, b) => a - b).indexOf(tempTime) -
+        1;
+    } else {
+      index = lyric_time_arr.indexOf(tempTime);
+    }
+    set_lyric_curr_index(index);
+
+    let el = document.getElementById("item" + index);
+    if (el) {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "nearest"
+      });
+    }
+  };
+
   const playing = getPlaying(state);
 
   if (!playing) {
@@ -106,6 +137,11 @@ const TrackPlayer = ({ track, closed }) => {
   const handleClose = useCallback(() => {
     dispatch(closePlayer());
   }, [dispatch, closePlayer]);
+
+  useEffect(() => {
+    setCurrentLyric(state.playing.progress / 1000);
+    console.log(lyric_curr_index);
+  }, [state.playing]);
 
   return (
     <IonModal isOpen={open} onDidDismiss={handleClose} className="track-player">
@@ -143,9 +179,9 @@ const TrackPlayer = ({ track, closed }) => {
         <ion-list>
           <ion-list-header> {currentTrack.title} </ion-list-header>
 
-          {currentTrack?.lyric?.map((obj) => {
+          {currentTrack?.lyric?.map((obj, idx) => {
             return (
-              <ion-item>
+              <ion-item id={"item" + idx}>
                 <ion-avatar slot="start">
                   <img src={img(currentTrack.img)} />
                 </ion-avatar>
