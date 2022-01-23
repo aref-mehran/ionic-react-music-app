@@ -1,4 +1,5 @@
 import React from "react";
+import { lyric as count_on_me_lyric } from "./assets/count_on_me.js";
 
 /**
  * This is a simple redux-like state management pattern for React using hooks
@@ -155,6 +156,22 @@ const logger = (reducer) => {
 
 const loggerReducer = logger(reducer);
 
+const get_lyric_arr = (lyric) => {
+  let txt_content = lyric;
+  let lyric_lines = txt_content.split("\n");
+
+  let arr = [];
+  for (let line of lyric_lines) {
+    let sentence = line.split("]")[1];
+    let time_str = line.split("]")[0].split("[")[1];
+    let min = Number(time_str.split(":")[0]);
+    let sec = Number(time_str.split(":")[1]);
+    let seek_time = min * 60 + sec;
+    arr.push({ seek_time: seek_time, sentence: sentence });
+  }
+
+  return arr;
+};
 const initialState = {
   playing: {
     index: 0,
@@ -182,6 +199,7 @@ const initialState = {
         img: "music/hey-jude.jpg",
         src:
           "https://dl.musicdel.ir/Music/1400/05/bruno_mars_count_on%20me%20128.mp3",
+        lyric: get_lyric_arr(count_on_me_lyric),
         time: 411000
       }
     ],
@@ -257,6 +275,7 @@ export const loggedIn = (user) => ({
 export const isPlayerOpen = (state) => state.ui.playerOpen;
 
 // Get all tracks in database
+
 export const getTracks = (state) => state.music.tracks;
 export const getNewTracks = (state) =>
   state.music.tracks.filter((t) =>

@@ -118,11 +118,6 @@ const TrackPlayer = ({ track, closed }) => {
           </IonButtons>
           <IonTitle>{currentTrack.title}</IonTitle>
         </IonToolbar>
-      </IonHeader>
-      <IonContent className="track-content">
-        <img src={img(currentTrack.img)} />
-        <h2>{currentTrack.title}</h2>
-        <h4>{currentTrack.artist}</h4>
 
         <TrackProgress
           playing={playing}
@@ -143,6 +138,26 @@ const TrackPlayer = ({ track, closed }) => {
           onNext={() => dispatch(nextTrack())}
           onFav={() => dispatch(favTrack(track))}
         />
+      </IonHeader>
+      <IonContent className="track-content">
+        <ion-list>
+          <ion-list-header> {currentTrack.title} </ion-list-header>
+
+          {currentTrack?.lyric?.map((obj) => {
+            return (
+              <ion-item>
+                <ion-avatar slot="start">
+                  <img src={img(currentTrack.img)} />
+                </ion-avatar>
+                <ion-label>
+                  <h2>Finn</h2>
+                  <h3>I'm a big deal</h3>
+                  <p>{obj.sentence}</p>
+                </ion-label>
+              </ion-item>
+            );
+          })}
+        </ion-list>
       </IonContent>
     </IonModal>
   );
