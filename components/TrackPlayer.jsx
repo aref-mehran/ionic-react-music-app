@@ -187,8 +187,13 @@ const TrackPlayer = ({ track, closed }) => {
                 </ion-avatar>
                 <ion-label>
                   <h2>Finn</h2>
-                  <h3>I'm a big deal</h3>
-                  <p>{obj.sentence}</p>
+                  <h3>{obj.sentence}</h3>
+
+                  <p>
+                    {lyric_curr_index === idx
+                      ? currentTrack.lyric_fa[idx].sentence
+                      : ""}
+                  </p>
                 </ion-label>
               </ion-item>
             );

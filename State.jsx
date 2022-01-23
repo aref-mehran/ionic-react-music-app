@@ -1,5 +1,6 @@
 import React from "react";
 import { lyric as count_on_me_lyric } from "./assets/count_on_me.js";
+import { lyric as count_on_me_lyric_fa } from "./assets/count_on_me_fa.js";
 
 /**
  * This is a simple redux-like state management pattern for React using hooks
@@ -200,6 +201,7 @@ const initialState = {
         src:
           "https://dl.musicdel.ir/Music/1400/05/bruno_mars_count_on%20me%20128.mp3",
         lyric: get_lyric_arr(count_on_me_lyric),
+        lyric_fa: get_lyric_arr(count_on_me_lyric_fa),
         time: 411000
       }
     ],
