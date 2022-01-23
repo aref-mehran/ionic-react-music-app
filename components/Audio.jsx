@@ -12,8 +12,6 @@ const HiddenAudio = (url) => {
   const [audio] = useState(new Audio(currentTrack.src));
 
   useEffect(() => {
-    console.log("eff1");
-
     audio.addEventListener("timeupdate", async (event) => {
       const playing = getPlaying(state);
 
@@ -30,7 +28,6 @@ const HiddenAudio = (url) => {
 
     // audio.currentTime = state.playing.progress;
     const playing = getPlaying(state);
-    console.log(playing);
     if (playing && !playing.paused) {
       audio.play();
     }

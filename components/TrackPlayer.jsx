@@ -140,7 +140,6 @@ const TrackPlayer = ({ track, closed }) => {
 
   useEffect(() => {
     setCurrentLyric(state.playing.progress / 1000);
-    console.log(lyric_curr_index);
   }, [state.playing]);
 
   return (
@@ -181,7 +180,7 @@ const TrackPlayer = ({ track, closed }) => {
 
           {currentTrack?.lyric?.map((obj, idx) => {
             return (
-              <ion-item id={"item" + idx}>
+              <ion-item key={idx} id={"item" + idx}>
                 <ion-avatar slot="start">
                   <img src={img(currentTrack.img)} />
                 </ion-avatar>
