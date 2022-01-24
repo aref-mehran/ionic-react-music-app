@@ -186,7 +186,7 @@ const get_lyric_arr = (lyric) => {
 const initialState = {
   playing: {
     index: 0,
-    progress: 27000,
+    progress: 0,
     manualSeek: false,
     paused: false,
     intervalId: null,
@@ -213,7 +213,7 @@ const initialState = {
         src: 'https://dl.musicdel.ir/Music/1400/05/bruno_mars_count_on%20me%20128.mp3',
         lyric: get_lyric_arr(count_on_me_lyric),
         lyric_fa: get_lyric_arr(count_on_me_lyric_fa),
-        time: 411000,
+        time: 600,
       },
     ],
     hotTracks: ['0', '1', '2', '3'],

@@ -140,7 +140,7 @@ const TrackPlayer = ({ track, closed }) => {
 
   useEffect(() => {
     if (!state.ui.scrolling) {
-      setCurrentLyric(state.playing.progress / 1000);
+      setCurrentLyric(state.playing.progress );
     }
   }, [state.playing]);
 
@@ -197,7 +197,7 @@ const TrackPlayer = ({ track, closed }) => {
                 button
                 onClick={() => {
                   state.playing.manulSeek = true;
-                  dispatch(seekTrack(Math.floor(obj.seek_time * 1000)));
+                  dispatch(seekTrack(Math.floor(obj.seek_time )));
                 }}
               >
                 {/* <ion-avatar slot="start">

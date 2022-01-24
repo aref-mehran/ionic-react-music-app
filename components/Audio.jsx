@@ -16,13 +16,13 @@ const HiddenAudio = (url) => {
       const playing = getPlaying(state);
       // if (playing && !playing.paused && !state.playing.sliding) {
       if (playing && !playing.paused && !state.playing.manulSeek) {
-        dispatch(seekTrack(Math.floor(audio.currentTime * 1000)));
+        dispatch(seekTrack(Math.floor(audio.currentTime)));
       }
     });
   }, []);
   useEffect(() => {
     if (state.playing.manulSeek) {
-      audio.currentTime = state.playing.progress / 1000;
+      audio.currentTime = state.playing.progress;
       state.playing.manulSeek = false;
     }
 
