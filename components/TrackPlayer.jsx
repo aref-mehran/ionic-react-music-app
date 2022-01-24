@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useEffect } from "react";
+import React, { useCallback, useContext, useRef, useEffect } from 'react';
 
 import {
   IonModal,
@@ -9,8 +9,8 @@ import {
   IonRange,
   IonButtons,
   IonButton,
-  IonIcon
-} from "@ionic/react";
+  IonIcon,
+} from '@ionic/react';
 
 import {
   arrowDown,
@@ -20,8 +20,8 @@ import {
   play,
   pause,
   playSkipForward,
-  removeCircleOutline
-} from "ionicons/icons";
+  removeCircleOutline,
+} from 'ionicons/icons';
 
 import {
   AppContext,
@@ -35,12 +35,12 @@ import {
   playTrack,
   seekTrack,
   nextTrack,
-  prevTrack
-} from "../State";
+  prevTrack,
+} from '../State';
 
-import { img, msToTime } from "../util";
+import { img, msToTime } from '../util';
 
-import "./TrackPlayer.css";
+import './TrackPlayer.css';
 
 const TrackProgress = ({ playing, track, onSeek }) => {
   const progress = playing.progress;
@@ -74,7 +74,7 @@ const TrackControls = ({
   onPlay,
   onPrev,
   onNext,
-  onFav
+  onFav,
 }) => {
   return (
     <div className="track-controls">
@@ -114,12 +114,12 @@ const TrackPlayer = ({ track, closed }) => {
     }
     set_lyric_curr_index(index);
 
-    let el = document.getElementById("item" + index);
+    let el = document.getElementById('item' + index);
     if (el) {
       el.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-        inline: "nearest"
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'nearest',
       });
     }
   };
@@ -154,7 +154,7 @@ const TrackPlayer = ({ track, closed }) => {
           <IonTitle>{currentTrack.title}</IonTitle>
         </IonToolbar>
 
-        <TrackProgress
+        {/* <TrackProgress
           playing={playing}
           track={currentTrack}
           onSeek={(n) => {
@@ -162,7 +162,7 @@ const TrackPlayer = ({ track, closed }) => {
             dispatch(seekTrack(n));
             state.playing.sliding = false;
           }}
-        />
+        /> */}
         <TrackControls
           playing={playing}
           track={currentTrack}
@@ -180,11 +180,11 @@ const TrackPlayer = ({ track, closed }) => {
 
           {currentTrack?.lyric?.map((obj, idx) => {
             return (
-              <ion-item key={idx} id={"item" + idx}>
+              <ion-item key={idx} id={'item' + idx}>
                 {/* <ion-avatar slot="start">
                   <img src={img(currentTrack.img)} />
                 </ion-avatar> */}
-                <ion-label style={{ whiteSpace: "normal" }}>
+                <ion-label style={{ whiteSpace: 'normal' }}>
                   {lyric_curr_index === idx ? (
                     <h2>{obj.sentence}</h2>
                   ) : (
@@ -194,7 +194,7 @@ const TrackPlayer = ({ track, closed }) => {
                   <p>
                     {lyric_curr_index === idx
                       ? currentTrack.lyric_fa[idx].sentence
-                      : ""}
+                      : ''}
                   </p>
                 </ion-label>
               </ion-item>
