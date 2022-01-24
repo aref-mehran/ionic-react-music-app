@@ -187,6 +187,7 @@ const initialState = {
   playing: {
     index: 0,
     progress: 27000,
+    manualSeek: false,
     paused: false,
     intervalId: null,
     sliding: false,

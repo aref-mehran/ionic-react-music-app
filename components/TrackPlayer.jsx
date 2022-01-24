@@ -191,7 +191,15 @@ const TrackPlayer = ({ track, closed }) => {
 
           {currentTrack?.lyric?.map((obj, idx) => {
             return (
-              <ion-item key={idx} id={'item' + idx}>
+              <ion-item
+                key={idx}
+                id={'item' + idx}
+                button
+                onClick={() => {
+                  state.playing.manulSeek = true;
+                  dispatch(seekTrack(Math.floor(obj.seek_time)));
+                }}
+              >
                 {/* <ion-avatar slot="start">
                   <img src={img(currentTrack.img)} />
                 </ion-avatar> */}
