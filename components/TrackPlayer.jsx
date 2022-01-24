@@ -197,7 +197,7 @@ const TrackPlayer = ({ track, closed }) => {
                 button
                 onClick={() => {
                   state.playing.manulSeek = true;
-                  dispatch(seekTrack(Math.floor(obj.seek_time)));
+                  dispatch(seekTrack(Math.floor(obj.seek_time * 1000)));
                 }}
               >
                 {/* <ion-avatar slot="start">

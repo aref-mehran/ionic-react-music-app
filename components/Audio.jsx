@@ -22,7 +22,7 @@ const HiddenAudio = (url) => {
   }, []);
   useEffect(() => {
     if (state.playing.manulSeek) {
-      audio.currentTime = state.playing.progress;
+      audio.currentTime = state.playing.progress / 1000;
       state.playing.manulSeek = false;
     }
 
