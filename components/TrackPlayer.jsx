@@ -139,7 +139,9 @@ const TrackPlayer = ({ track, closed }) => {
   }, [dispatch, closePlayer]);
 
   useEffect(() => {
-    setCurrentLyric(state.playing.progress / 1000);
+    if (!state.ui.scrolling) {
+      setCurrentLyric(state.playing.progress / 1000);
+    }
   }, [state.playing]);
 
   return (
@@ -174,7 +176,16 @@ const TrackPlayer = ({ track, closed }) => {
           onFav={() => dispatch(favTrack(track))}
         />
       </IonHeader>
-      <IonContent className="track-content">
+      <IonContent
+        className="track-content"
+        scrollEvents={true}
+        onIonScroll={() => {
+          state.ui.scrolling = true;
+        }}
+        onIonScrollEnd={() => {
+          state.ui.scrolling = false;
+        }}
+      >
         <ion-list>
           <ion-list-header> {currentTrack.title} </ion-list-header>
 
