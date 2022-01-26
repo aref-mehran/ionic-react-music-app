@@ -180,7 +180,7 @@ const get_lyric_arr = (lyric) => {
     let time_str = line.split("]")[0].split("[")[1];
     let min = Number(time_str.split(":")[0]);
     let sec = Number(time_str.split(":")[1]);
-    let seek_time = min * 60 + sec;
+    let seek_time = min * 60 + sec - 0.5;
     arr.push({ seek_time: seek_time, sentence: sentence });
   }
 
