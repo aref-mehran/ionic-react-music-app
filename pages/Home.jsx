@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, useRef } from "react";
 import {
   IonPage,
   IonHeader,
@@ -9,26 +9,22 @@ import {
   IonListHeader,
   IonItem,
   IonLabel,
-  IonButton,
   IonThumbnail,
-  IonGrid,
-  IonRow,
-  IonCol
-} from '@ionic/react';
+  CreateAnimation
+} from "@ionic/react";
 
-import { AppContext, getHotTracks, getNewTracks, playTrack } from '../State';
+import { AppContext, playTrack } from "../State";
 
-import { img } from '../util';
+import { img } from "../util";
 
-import './Home.css';
+import "./Home.css";
 
 const Home = () => {
   const { state, dispatch } = useContext(AppContext);
 
-  const hotTracks = getHotTracks(state);
-  const newTracks = getNewTracks(state);
+  const animation = useRef(null);
 
-  const doPlay = useCallback(track => {
+  const doPlay = useCallback((track) => {
     dispatch(playTrack(track));
   });
 
@@ -42,45 +38,42 @@ const Home = () => {
       <IonContent>
         <IonList>
           <IonListHeader>
-            <IonLabel>Hot Tracks</IonLabel>
+            <IonLabel>آهنگ ها</IonLabel>
           </IonListHeader>
-          {hotTracks.map(track => (
+          {state.music.tracks.map((track) => (
             <IonItem key={track.title} onClick={() => doPlay(track)} button>
               <IonThumbnail slot="start">
-                <img src={img(track.img)}/>
+                <img src={img(track.img)} />
               </IonThumbnail>
-              <IonLabel>
-                <h2>{track.title}</h2>
-                <p>{track.artist}</p>
-              </IonLabel>
+
+              <CreateAnimation
+                ref={animation}
+                duration={1500}
+                iterations={Infinity}
+                fromTo={[
+                  {
+                    property: "transform",
+                    fromValue: "translateX(0px)",
+                    toValue: "translateX(100px)"
+                  },
+                  { property: "opacity", fromValue: "1", toValue: "0.2" }
+                ]}
+              ></CreateAnimation>
+
+              <h2
+                style={
+                  state.playing.index == track.id
+                    ? {
+                        color: "green",
+                        fontWeight: "bold"
+                      }
+                    : {}
+                }
+              >
+                {track.title}
+              </h2>
             </IonItem>
           ))}
-
-        </IonList>
-
-        <IonList>
-          <IonListHeader>
-            <ion-label>New Music</ion-label>
-          </IonListHeader>
-          <IonGrid>
-            <IonRow>
-              {newTracks.map(track => (
-                <IonCol
-                  size={6}
-                  className="new-track"
-                  key={track.title}
-                  onClick={() => doPlay(track)}>
-                  <img src={img(track.img)} />
-                  <IonItem lines="none">
-                    <IonLabel>
-                      <h3>{track.title}</h3>
-                      <p>{track.artist}</p>
-                    </IonLabel>
-                  </IonItem>
-                </IonCol>
-              ))}
-            </IonRow>
-          </IonGrid>
         </IonList>
       </IonContent>
     </IonPage>
