@@ -1,18 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from "react";
 
-import { AppContext, getPlaying, seekTrack, getCurrentTrack } from '../State';
+import { AppContext, getPlaying, seekTrack, getCurrentTrack } from "../State";
 
 // A really naive fake play routine
 const HiddenAudio = (url) => {
   const { state, dispatch } = useContext(AppContext);
   const currentTrack = getCurrentTrack(state);
 
-  const [handle, setHandle] = useState(null);
-
   const [audio] = useState(new Audio(currentTrack.src));
 
   useEffect(() => {
-    audio.addEventListener('timeupdate', async (event) => {
+    audio.src = currentTrack.src;
+  }, [currentTrack.src]);
+
+  useEffect(() => {
+    audio.addEventListener("timeupdate", async (event) => {
       const playing = getPlaying(state);
       // if (playing && !playing.paused && !state.playing.sliding) {
       if (playing && !playing.paused && !state.playing.manulSeek) {
