@@ -42,30 +42,7 @@ import { img, msToTime } from "../util";
 
 import "./TrackPlayer.css";
 
-const TrackProgress = ({ playing, track, onSeek }) => {
-  const progress = playing.progress;
-  const left = track.time - progress;
-  const percent = (progress / track.time) * 100;
 
-  const s = (p) => {
-    const newTime = (p / 100) * track.time;
-    onSeek(newTime);
-  };
-  return (
-    <div className="track-progress">
-      <IonRange
-        value={percent}
-        onIonChange={(e) => {
-          s(e.target.value);
-        }}
-      />
-      <div className="track-progress-time">
-        <div className="track-progress-time-current">{msToTime(progress)}</div>
-        <div className="track-progress-time-left">-{msToTime(left)}</div>
-      </div>
-    </div>
-  );
-};
 
 const TrackControls = ({
   playing,
@@ -156,15 +133,6 @@ const TrackPlayer = ({ track, closed }) => {
           <IonTitle>{currentTrack.title}</IonTitle>
         </IonToolbar>
 
-        {/* <TrackProgress
-          playing={playing}
-          track={currentTrack}
-          onSeek={(n) => {
-            state.playing.sliding = true;
-            dispatch(seekTrack(n));
-            state.playing.sliding = false;
-          }}
-        /> */}
         <TrackControls
           playing={playing}
           track={currentTrack}
