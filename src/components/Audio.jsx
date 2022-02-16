@@ -1,3 +1,4 @@
+import localforage from "localforage";
 import React, { useContext, useEffect, useState } from "react";
 
 import { AppContext, getPlaying, seekTrack, getCurrentTrack } from "../State";
@@ -10,7 +11,17 @@ const HiddenAudio = (url) => {
   const [audio] = useState(new Audio(currentTrack.src));
 
   useEffect(() => {
-    audio.src = currentTrack.src;
+    (async () => {
+      var blob = await localforage.getItem(currentTrack.title);
+
+      var urlCreator = window.URL || window.webkitURL;
+      var fileUrl = urlCreator.createObjectURL(blob);
+      if (fileUrl) {
+        audio.src = fileUrl;
+      } else {
+        audio.src = currentTrack.src;
+      }
+    })();
   }, [currentTrack.src]);
 
   useEffect(() => {

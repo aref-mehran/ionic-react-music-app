@@ -213,8 +213,7 @@ const initialState = {
         title: "Count on you",
         artist: "The Beatles",
         img: "music/hey-jude.jpg",
-        src:
-          "https://dl.musicdel.ir/Music/1400/05/bruno_mars_count_on%20me%20128.mp3",
+        src: "./assets/count_on_me.mp3",
         lyric: get_lyric_arr(count_on_me_lyric),
         lyric_fa: get_lyric_arr(count_on_me_lyric_fa),
         time: 600

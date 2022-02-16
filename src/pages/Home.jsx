@@ -13,11 +13,41 @@ import {
   CreateAnimation
 } from "@ionic/react";
 
+import localforage from "localforage";
+
 import { AppContext, playTrack } from "../State";
 
 import { img } from "../util";
 
 import "./Home.css";
+
+async function downloadTOIndexedDb(url, title) {
+  var res = await fetch(url);
+  var reader = res.body.getReader();
+  var data = await reader.read();
+  console.log(data);
+  var blob = new Blob([data.value], { type: "audio/mp3" });
+  localforage.setItem(title, blob);
+
+  // const res = await fetch(url);
+  // var blob = await res.blob();
+  // console.log(blob);
+  // const total = blob.size;
+
+  // const reader = res.body.getReader();
+  // let bytesReceived = 0;
+  // while (true) {
+  //   const result = await reader.read();
+  //   if (result.done) {
+  //     console.log("Fetch complete");
+  //     break;
+  //   }
+  //   bytesReceived += result.value.length;
+  //   console.log("Received", bytesReceived / total, "bytes of data so far");
+  // }
+
+  // localforage.setItem(title, blob);
+}
 
 const Home = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -41,38 +71,43 @@ const Home = () => {
             <IonLabel>آهنگ ها</IonLabel>
           </IonListHeader>
           {state.music.tracks.map((track) => (
-            <IonItem key={track.title} onClick={() => doPlay(track)} button>
-              <IonThumbnail slot="start">
-                <img src={img(track.img)} />
-              </IonThumbnail>
+            <div>
+              <IonItem key={track.title} onClick={() => doPlay(track)} button>
+                <IonThumbnail slot="start">
+                  <img src={img(track.img)} />
+                </IonThumbnail>
 
-              <CreateAnimation
-                ref={animation}
-                duration={1500}
-                iterations={Infinity}
-                fromTo={[
-                  {
-                    property: "transform",
-                    fromValue: "translateX(0px)",
-                    toValue: "translateX(100px)"
-                  },
-                  { property: "opacity", fromValue: "1", toValue: "0.2" }
-                ]}
-              ></CreateAnimation>
+                <CreateAnimation
+                  ref={animation}
+                  duration={1500}
+                  iterations={Infinity}
+                  fromTo={[
+                    {
+                      property: "transform",
+                      fromValue: "translateX(0px)",
+                      toValue: "translateX(100px)"
+                    },
+                    { property: "opacity", fromValue: "1", toValue: "0.2" }
+                  ]}
+                ></CreateAnimation>
 
-              <h2
-                style={
-                  state.playing.index == track.id
-                    ? {
-                        color: "green",
-                        fontWeight: "bold"
-                      }
-                    : {}
-                }
-              >
-                {track.title}
-              </h2>
-            </IonItem>
+                <h2
+                  style={
+                    state.playing.index == track.id
+                      ? {
+                          color: "green",
+                          fontWeight: "bold"
+                        }
+                      : {}
+                  }
+                >
+                  {track.title}
+                </h2>
+              </IonItem>
+              <div onClick={() => downloadTOIndexedDb(track.src, track.title)}>
+                click
+              </div>
+            </div>
           ))}
         </IonList>
       </IonContent>

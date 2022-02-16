@@ -8,6 +8,7 @@
     "@ionic/react": "^5.0.0",
     "@ionic/react-router": "^5.0.0",
     "ionicons": "^5.0.0",
+    "localforage": "1.10.0",
     "react": "16.11.0",
     "react-datepicker": "^2.10.0",
     "react-dom": "16.11.0",
