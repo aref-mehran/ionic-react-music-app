@@ -15,6 +15,7 @@ const HiddenAudio = (url) => {
       var blob = await localforage.getItem(currentTrack.title);
 
       var urlCreator = window.URL || window.webkitURL;
+
       var fileUrl = urlCreator.createObjectURL(blob);
       if (fileUrl) {
         audio.src = fileUrl;

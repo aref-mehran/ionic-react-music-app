@@ -22,17 +22,17 @@ import { img } from "../util";
 import "./Home.css";
 
 async function downloadTOIndexedDb(url, title) {
-  var res = await fetch(url);
-  var reader = res.body.getReader();
-  var data = await reader.read();
-  console.log(data);
-  var blob = new Blob([data.value], { type: "audio/mp3" });
-  localforage.setItem(title, blob);
+  // var res = await fetch(url);
+  // var reader = res.body.getReader();
+  // var data = await reader.read();
+  // console.log(data);
+  // var blob = new Blob([data.value], { type: "audio/mp3" });
+  // localforage.setItem(title, blob);
 
-  // const res = await fetch(url);
-  // var blob = await res.blob();
-  // console.log(blob);
-  // const total = blob.size;
+  const res = await fetch("../assets/count_on_me.mp3");
+  var blob = await res.blob();
+  // blob = new Blob([blob], { type: "audio/mp3" });
+  const total = blob.size;
 
   // const reader = res.body.getReader();
   // let bytesReceived = 0;
@@ -46,7 +46,7 @@ async function downloadTOIndexedDb(url, title) {
   //   console.log("Received", bytesReceived / total, "bytes of data so far");
   // }
 
-  // localforage.setItem(title, blob);
+  localforage.setItem(title, blob);
 }
 
 const Home = () => {
