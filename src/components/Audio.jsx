@@ -14,10 +14,11 @@ const HiddenAudio = (url) => {
     (async () => {
       var blob = await localforage.getItem(currentTrack.title);
 
+      if (blob) {
       var urlCreator = window.URL || window.webkitURL;
 
       var fileUrl = urlCreator.createObjectURL(blob);
-      if (fileUrl) {
+
         audio.src = fileUrl;
       } else {
         audio.src = currentTrack.src;

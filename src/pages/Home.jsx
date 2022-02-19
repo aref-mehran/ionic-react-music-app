@@ -29,7 +29,7 @@ async function downloadTOIndexedDb(url, title) {
   // var blob = new Blob([data.value], { type: "audio/mp3" });
   // localforage.setItem(title, blob);
 
-  const res = await fetch("../assets/count_on_me.mp3");
+  const res = await fetch(url);
   var blob = await res.blob();
   // blob = new Blob([blob], { type: "audio/mp3" });
   const total = blob.size;
