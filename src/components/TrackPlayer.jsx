@@ -22,6 +22,7 @@ import {
   playSkipForward,
   removeCircleOutline
 } from "ionicons/icons";
+import localforage from "localforage";
 
 import {
   AppContext,
@@ -41,6 +42,8 @@ import {
 import { img, msToTime } from "../util";
 
 import "./TrackPlayer.css";
+
+
 
 
 
@@ -72,6 +75,9 @@ const TrackPlayer = ({ track, closed }) => {
   const { state, dispatch } = useContext(AppContext);
 
   const [lyric_curr_index, set_lyric_curr_index] = React.useState(0);
+
+
+
 
   const setCurrentLyric = (tempTime) => {
     const currentTrack = getCurrentTrack(state);
@@ -114,6 +120,7 @@ const TrackPlayer = ({ track, closed }) => {
   const handleClose = useCallback(() => {
     dispatch(closePlayer());
   }, [dispatch, closePlayer]);
+  
 
   useEffect(() => {
     if (!state.ui.scrolling) {
@@ -131,6 +138,8 @@ const TrackPlayer = ({ track, closed }) => {
             </IonButton>
           </IonButtons>
           <IonTitle>{currentTrack.title}</IonTitle>
+          <IonTitle>{'salam: '+state.downloading}</IonTitle>
+
         </IonToolbar>
 
         <TrackControls

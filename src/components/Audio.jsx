@@ -8,7 +8,31 @@ const HiddenAudio = (url) => {
   const { state, dispatch } = useContext(AppContext);
   const currentTrack = getCurrentTrack(state);
 
-  const [audio] = useState(new Audio(currentTrack.src));
+  const [audio] = useState(new Audio());
+
+  async function downloadTOIndexedDb(url, title) {
+    alert('called');
+
+    var currentBlob = await localforage.getItem(title);
+
+    if (currentBlob) {
+      return;
+    }
+    state.downloading=true;
+
+
+    const res = await fetch(url);
+  
+    var blob = await res.blob();
+    // blob = new Blob([blob], { type: "audio/mp3" });
+    const total = blob.size;
+
+    state.downloading=false;
+    alert(state.downloading);
+
+    localforage.setItem(title, blob);
+
+  }
 
   useEffect(() => {
     (async () => {
@@ -21,7 +45,8 @@ const HiddenAudio = (url) => {
 
         audio.src = fileUrl;
       } else {
-        audio.src = currentTrack.src;
+        downloadTOIndexedDb(currentTrack.src, currentTrack.title);
+        // audio.src = currentTrack.src;
       }
     })();
   }, [currentTrack.src]);

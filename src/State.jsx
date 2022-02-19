@@ -187,13 +187,16 @@ const get_lyric_arr = (lyric) => {
   return arr;
 };
 const initialState = {
+  downloading: false,
+
   playing: {
     index: 0,
     progress: 0,
     manualSeek: false,
     paused: false,
     intervalId: null,
-    sliding: false
+    sliding: false,
+
   },
   auth: {
     user: null
