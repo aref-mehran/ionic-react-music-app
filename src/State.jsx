@@ -213,7 +213,7 @@ const initialState = {
         title: "Count on you",
         artist: "The Beatles",
         img: "music/hey-jude.jpg",
-        src: "./assets/count_on_me.mp3",
+        src: require("./assets/count_on_me.mp3"),
         lyric: get_lyric_arr(count_on_me_lyric),
         lyric_fa: get_lyric_arr(count_on_me_lyric_fa),
         time: 600
