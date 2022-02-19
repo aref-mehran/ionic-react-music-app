@@ -30,21 +30,25 @@ async function downloadTOIndexedDb(url, title) {
   // localforage.setItem(title, blob);
 
   const res = await fetch(url);
+
+  const reader = res.body.getReader();
+  let bytesReceived = 0;
+  var result;
+  while (true) {
+    result = await reader.read();
+    if (result.done) {
+      console.log("Fetch complete");
+      break;
+    }
+    bytesReceived += result.value.length;
+    console.log("Received", bytesReceived / 50000, "bytes of data so far");
+  }
+
   var blob = await res.blob();
   // blob = new Blob([blob], { type: "audio/mp3" });
   const total = blob.size;
 
-  // const reader = res.body.getReader();
-  // let bytesReceived = 0;
-  // while (true) {
-  //   const result = await reader.read();
-  //   if (result.done) {
-  //     console.log("Fetch complete");
-  //     break;
-  //   }
-  //   bytesReceived += result.value.length;
-  //   console.log("Received", bytesReceived / total, "bytes of data so far");
-  // }
+
 
   localforage.setItem(title, blob);
 }

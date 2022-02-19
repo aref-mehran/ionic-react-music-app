@@ -223,8 +223,7 @@ const initialState = {
         title: "Courage to Change",
         artist: "The Beatles",
         img: "music/hey-jude.jpg",
-        src:
-          "https://files.musicfeed.ir/dir/2020/9/Sia%20Courage%20to%20Change%20128.mp3",
+        src: require("./assets/Courage to Change.mp3"),
         lyric: get_lyric_arr(Courage_to_change),
         lyric_fa: get_lyric_arr(Courage_to_change_fa),
         time: 600
