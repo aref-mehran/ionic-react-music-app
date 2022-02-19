@@ -193,7 +193,7 @@ const initialState = {
     index: 0,
     progress: 0,
     manualSeek: false,
-    paused: false,
+    paused: true,
     intervalId: null,
     sliding: false,
 

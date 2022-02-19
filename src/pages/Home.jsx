@@ -44,8 +44,8 @@ const Home = () => {
             <IonLabel>آهنگ ها</IonLabel>
           </IonListHeader>
           {state.music.tracks.map((track) => (
-            <div>
-              <IonItem key={track.title} onClick={() => doPlay(track)} button>
+            <div key={track.title}>
+              <IonItem  onClick={() => doPlay(track)} button>
                 <IonThumbnail slot="start">
                   <img src={img(track.img)} />
                 </IonThumbnail>

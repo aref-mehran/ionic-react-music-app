@@ -11,7 +11,6 @@ const HiddenAudio = (url) => {
   const [audio] = useState(new Audio());
 
   async function downloadTOIndexedDb(url, title) {
-    alert('called');
 
     var currentBlob = await localforage.getItem(title);
 
@@ -28,27 +27,35 @@ const HiddenAudio = (url) => {
     const total = blob.size;
 
     state.downloading=false;
-    alert(state.downloading);
 
-    localforage.setItem(title, blob);
+    await localforage.setItem(title, blob);
+    playCurrentTrack();
 
   }
 
+   async function playCurrentTrack(){
+
+    var blob = await localforage.getItem(currentTrack.title);
+
+    if (blob) {
+    var urlCreator = window.URL || window.webkitURL;
+
+    var fileUrl = urlCreator.createObjectURL(blob);
+
+      audio.src = fileUrl;
+      audio.play();
+
+    } else {
+      downloadTOIndexedDb(currentTrack.src, currentTrack.title);
+    }
+
+
+  }
   useEffect(() => {
-    (async () => {
-      var blob = await localforage.getItem(currentTrack.title);
+    if(!state.playing.paused){
+      playCurrentTrack();
 
-      if (blob) {
-      var urlCreator = window.URL || window.webkitURL;
-
-      var fileUrl = urlCreator.createObjectURL(blob);
-
-        audio.src = fileUrl;
-      } else {
-        downloadTOIndexedDb(currentTrack.src, currentTrack.title);
-        // audio.src = currentTrack.src;
-      }
-    })();
+    }
   }, [currentTrack.src]);
 
   useEffect(() => {
@@ -69,6 +76,9 @@ const HiddenAudio = (url) => {
     // audio.currentTime = state.playing.progress;
     const playing = getPlaying(state);
     if (playing && !playing.paused) {
+      if(!audio.src){
+        playCurrentTrack();
+      }
       audio.play();
     }
     if (playing && playing.paused) {
