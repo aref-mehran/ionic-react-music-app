@@ -187,7 +187,7 @@ const get_lyric_arr = (lyric) => {
   return arr;
 };
 const initialState = {
-  downloading: false,
+  loading: true,
 
   playing: {
     index: 0,
@@ -217,6 +217,7 @@ const initialState = {
         artist: "The Beatles",
         img: "music/hey-jude.jpg",
         src: require("./assets/count_on_me.mp3"),
+        downloadProgress:0,
         lyric: get_lyric_arr(count_on_me_lyric),
         lyric_fa: get_lyric_arr(count_on_me_lyric_fa),
         time: 600
@@ -227,6 +228,7 @@ const initialState = {
         artist: "The Beatles",
         img: "music/hey-jude.jpg",
         src: require("./assets/Courage to Change.mp3"),
+        downloadProgress:0,
         lyric: get_lyric_arr(Courage_to_change),
         lyric_fa: get_lyric_arr(Courage_to_change_fa),
         time: 600
