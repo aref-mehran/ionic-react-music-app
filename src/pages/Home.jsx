@@ -14,7 +14,7 @@ import {
 } from "@ionic/react";
 
 
-import { AppContext, playTrack } from "../State";
+import { AppContext, playTrack,openPlayer } from "../State";
 
 import { img } from "../util";
 
@@ -28,6 +28,7 @@ const Home = () => {
   const animation = useRef(null);
 
   const doPlay = useCallback((track) => {
+    dispatch(openPlayer());
     dispatch(playTrack(track));
   });
 

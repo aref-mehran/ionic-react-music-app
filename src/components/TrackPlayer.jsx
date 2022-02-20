@@ -37,6 +37,7 @@ import {
   seekTrack,
   nextTrack,
   prevTrack
+  
 } from "../State";
 
 import { img, msToTime } from "../util";
@@ -129,10 +130,9 @@ const TrackPlayer = ({ track, closed }) => {
   }, [state.playing]);
 
 
-  // if(state.downloading){
-  //   alert(state.downloading);
-  //   return<div>downloading</div>
-  // }
+  if(state.downloading){
+    return<div>downloading</div>
+  }
 
   return (
     <IonModal isOpen={open} onDidDismiss={handleClose} className="track-player">
