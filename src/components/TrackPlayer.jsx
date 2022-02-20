@@ -130,9 +130,6 @@ const TrackPlayer = ({ track, closed }) => {
   }, [state.playing]);
 
 
-  if(state.downloading){
-    return<div>downloading</div>
-  }
 
   return (
     <IonModal isOpen={open} onDidDismiss={handleClose} className="track-player">
@@ -144,7 +141,6 @@ const TrackPlayer = ({ track, closed }) => {
             </IonButton>
           </IonButtons>
           <IonTitle>{currentTrack.title}</IonTitle>
-          <IonTitle>{'salam: '+state.downloading}</IonTitle>
 
         </IonToolbar>
 
