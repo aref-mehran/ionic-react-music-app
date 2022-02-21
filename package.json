@@ -22,7 +22,10 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "workbox": "latest",
+    "serve": "latest"
+
   },
   "browserslist": {
     "production": [
