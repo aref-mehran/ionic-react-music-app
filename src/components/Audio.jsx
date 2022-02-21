@@ -17,7 +17,8 @@ const HiddenAudio = (url) => {
     if (currentBlob) {
       return;
     }
-    state.downloading=true;
+
+    currentTrack.downloadProgress=10;
 
 
     const res = await fetch(url);
@@ -26,10 +27,11 @@ const HiddenAudio = (url) => {
     // blob = new Blob([blob], { type: "audio/mp3" });
     const total = blob.size;
 
-    state.downloading=false;
 
     await localforage.setItem(title, blob);
     playCurrentTrack();
+
+    currentTrack.downloadProgress = 100;
 
   }
 
