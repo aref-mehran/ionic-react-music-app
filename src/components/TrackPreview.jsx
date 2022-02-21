@@ -8,6 +8,8 @@ import {
 import { img } from '../util';
 
 import { IonButton, IonIcon, IonGrid, IonRow, IonCol, IonThumbnail } from '@ionic/react';
+import { musicalNote} from "ionicons/icons";
+
 import { play, pause } from 'ionicons/icons';
 import './TrackPreview.css';
 
@@ -56,7 +58,8 @@ const TrackPreview = ({ tabBarTop }) => {
       <div className="track-preview-wrapper">
         <div className="track-thumbnail">
           <IonThumbnail>
-            <img src={img(track.img)} className="track-art" />
+          <IonIcon  size="large" color="primary" icon={musicalNote} />
+
           </IonThumbnail>
         </div>
 
