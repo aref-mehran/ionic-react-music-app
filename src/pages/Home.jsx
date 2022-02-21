@@ -21,7 +21,7 @@ import {
   IonIcon,
 } from "@ionic/react";
 
-import { checkmarkDoneCircle} from "ionicons/icons";
+import { checkmarkDoneCircle,musicalNote,checkmarkDone} from "ionicons/icons";
 
 
 import localforage from "localforage";
@@ -65,21 +65,18 @@ const Home = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Music</IonTitle>
+          <IonTitle>آهنگ ها</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         <IonList>
-          <IonListHeader>
-            <IonLabel>آهنگ ها</IonLabel>
-          </IonListHeader>
           {state.music.tracks.map((track, idx) => (
             <div key={track.title}>
               <IonItem onClick={() => doPlay(track)} button>
-                <IonThumbnail slot="start">
-                  <img src={img(track.img)} />
-                </IonThumbnail>
 
+              <IonIcon  size="large" color="primary" icon={musicalNote} />
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <CreateAnimation
                   ref={animation}
                   duration={1500}
@@ -113,8 +110,9 @@ const Home = () => {
                     <IonSpinner name="crescent"></IonSpinner>
                   </div>
                 )}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {state.music.tracks[idx].downloadProgress == 100 && (
-                  <IonIcon color="secondary" icon={checkmarkDoneCircle} />
+                  <IonIcon  size="small"  icon={checkmarkDone} />
 
                 )}
 
