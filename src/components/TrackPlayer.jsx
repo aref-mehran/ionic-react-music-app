@@ -9,7 +9,7 @@ import {
   IonRange,
   IonButtons,
   IonButton,
-  IonIcon
+  IonIcon,
 } from "@ionic/react";
 
 import {
@@ -20,7 +20,7 @@ import {
   play,
   pause,
   playSkipForward,
-  removeCircleOutline
+  removeCircleOutline,
 } from "ionicons/icons";
 import localforage from "localforage";
 
@@ -36,17 +36,12 @@ import {
   playTrack,
   seekTrack,
   nextTrack,
-  prevTrack
-  
+  prevTrack,
 } from "../State";
 
 import { img, msToTime } from "../util";
 
 import "./TrackPlayer.css";
-
-
-
-
 
 const TrackControls = ({
   playing,
@@ -55,7 +50,7 @@ const TrackControls = ({
   onPlay,
   onPrev,
   onNext,
-  onFav
+  onFav,
 }) => {
   return (
     <div className="track-controls">
@@ -76,9 +71,6 @@ const TrackPlayer = ({ track, closed }) => {
   const { state, dispatch } = useContext(AppContext);
 
   const [lyric_curr_index, set_lyric_curr_index] = React.useState(0);
-
-
-
 
   const setCurrentLyric = (tempTime) => {
     const currentTrack = getCurrentTrack(state);
@@ -103,7 +95,7 @@ const TrackPlayer = ({ track, closed }) => {
       el.scrollIntoView({
         behavior: "smooth",
         block: "center",
-        inline: "nearest"
+        inline: "nearest",
       });
     }
   };
@@ -121,15 +113,13 @@ const TrackPlayer = ({ track, closed }) => {
   const handleClose = useCallback(() => {
     dispatch(closePlayer());
   }, [dispatch, closePlayer]);
-  
+
 
   useEffect(() => {
     if (!state.ui.scrolling) {
       setCurrentLyric(state.playing.progress);
     }
   }, [state.playing]);
-
-
 
   return (
     <IonModal isOpen={open} onDidDismiss={handleClose} className="track-player">

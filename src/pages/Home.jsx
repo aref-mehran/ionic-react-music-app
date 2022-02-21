@@ -40,8 +40,12 @@ const Home = () => {
   const animation = useRef(null);
 
   const doPlay = useCallback((track) => {
-    dispatch(openPlayer());
     dispatch(playTrack(track));
+    if (track.downloadProgress == 100) {
+      dispatch(openPlayer());
+    }
+
+
   });
 
   useEffect(() => {
