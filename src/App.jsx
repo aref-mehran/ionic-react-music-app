@@ -19,16 +19,16 @@ import HiddenAudio from "./components/Audio";
 import TrackPlayer from "./components/TrackPlayer";
 
 const App = () => {
-    var root;
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        root="/";
-    } else {
-        // production build code
-    }
+    // var root;
+    // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    //     root="/";
+    // } else {
+    //     // production build code
+    // }
   return (
     <AppContextProvider>
       <IonApp>
-        <IonReactRouter root='/ionic-react-music-app/build'>
+        <IonReactRouter >
           <IonPage>
             <IonRouterOutlet>
               <Route
