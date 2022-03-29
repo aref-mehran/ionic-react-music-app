@@ -42,18 +42,18 @@ const Tabs = () => {
       </TabBarSticky>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/browse" component={Music} exact={true} />
+          <Route path="/" component={Music}  />
           <Route path="/track/:trackId" component={Track} />
           <Route path="/search/track/:trackId" component={Track} />
           <Route
             path="/"
-            render={() => <Redirect to="/browse" />}
-            exact={true}
+            render={() => <Redirect to="/" />}
+           
           />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
-          {/* <IonTabButton tab="browse" href="/browse">
+          {/* <IonTabButton tab="" href="/">
           <IonIcon icon={home} />
           <IonLabel>Home</IonLabel>
         </IonTabButton>

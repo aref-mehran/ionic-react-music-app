@@ -32,7 +32,7 @@ const App = () => {
           <IonPage>
             <IonRouterOutlet>
               <Route
-                exact={true}
+                
                 path="/"
                 render={() => <Redirect to={urls.APP_HOME} />}
               />

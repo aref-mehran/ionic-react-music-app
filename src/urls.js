@@ -1,5 +1,5 @@
 const URLS = {
-  APP_HOME: '/browse',
+  APP_HOME: '/',
   APP_SEARCH: '/search',
   APP_USER: '/user',
   APP_INFO: '/info',
