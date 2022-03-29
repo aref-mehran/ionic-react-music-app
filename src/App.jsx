@@ -37,7 +37,7 @@ const App = () => {
                 render={() => <Redirect to={urls.APP_HOME} />}
               />
             </IonRouterOutlet>
-            <Route path="/app" component={Tabs} />
+            <Route path="/" component={Tabs} />
             <HiddenAudio />
             <TrackPlayer />
           </IonPage>

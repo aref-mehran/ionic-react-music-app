@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ionic-react-music-app/build/static/css/main.58c0c7f3.css",
-    "main.js": "/ionic-react-music-app/build/static/js/main.2da05d77.js",
+    "main.js": "/ionic-react-music-app/build/static/js/main.66770b96.js",
     "static/js/4588.8da94cf0.chunk.js": "/ionic-react-music-app/build/static/js/4588.8da94cf0.chunk.js",
     "static/js/2869.df04fd2d.chunk.js": "/ionic-react-music-app/build/static/js/2869.df04fd2d.chunk.js",
     "static/js/2499.af91cc1d.chunk.js": "/ionic-react-music-app/build/static/js/2499.af91cc1d.chunk.js",
@@ -58,7 +58,7 @@
     "static/media/count_on_me.mp3": "/ionic-react-music-app/build/static/media/count_on_me.5994a10a163ddb440739.mp3",
     "index.html": "/ionic-react-music-app/build/index.html",
     "main.58c0c7f3.css.map": "/ionic-react-music-app/build/static/css/main.58c0c7f3.css.map",
-    "main.2da05d77.js.map": "/ionic-react-music-app/build/static/js/main.2da05d77.js.map",
+    "main.66770b96.js.map": "/ionic-react-music-app/build/static/js/main.66770b96.js.map",
     "4588.8da94cf0.chunk.js.map": "/ionic-react-music-app/build/static/js/4588.8da94cf0.chunk.js.map",
     "2869.df04fd2d.chunk.js.map": "/ionic-react-music-app/build/static/js/2869.df04fd2d.chunk.js.map",
     "2499.af91cc1d.chunk.js.map": "/ionic-react-music-app/build/static/js/2499.af91cc1d.chunk.js.map",
@@ -114,6 +114,6 @@
   },
   "entrypoints": [
     "static/css/main.58c0c7f3.css",
-    "static/js/main.2da05d77.js"
+    "static/js/main.66770b96.js"
   ]
 }

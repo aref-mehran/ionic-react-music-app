@@ -42,30 +42,30 @@ const Tabs = () => {
       </TabBarSticky>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/app/browse" component={Music} exact={true} />
-          <Route path="/app/track/:trackId" component={Track} />
-          <Route path="/app/search/track/:trackId" component={Track} />
+          <Route path="/browse" component={Music} exact={true} />
+          <Route path="/track/:trackId" component={Track} />
+          <Route path="/search/track/:trackId" component={Track} />
           <Route
-            path="/app/"
-            render={() => <Redirect to="/app/browse" />}
+            path="/"
+            render={() => <Redirect to="/browse" />}
             exact={true}
           />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
-          {/* <IonTabButton tab="browse" href="/app/browse">
+          {/* <IonTabButton tab="browse" href="/browse">
           <IonIcon icon={home} />
           <IonLabel>Home</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="search" href="/app/search">
+        <IonTabButton tab="search" href="/search">
           <IonIcon icon={search} />
           <IonLabel>Search</IonLabel>
         </IonTabButton>
-        <IonTabButton tab="account" href="/app/account">
+        <IonTabButton tab="account" href="/account">
           <IonIcon icon={person} />
           <IonLabel>Your Library</IonLabel>
         </IonTabButton>
-          <IonTabButton tab="readme" href="/app/readme">
+          <IonTabButton tab="readme" href="/readme">
           <IonIcon icon={informationCircle} />
           <IonLabel>README</IonLabel>
         </IonTabButton> */}
