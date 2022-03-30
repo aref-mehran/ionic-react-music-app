@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && npm i -g workbox-cli serve && workbox generateSW && serve -s ./build",
+    "build-serve": "react-scripts build && npm i -g workbox-cli serve && workbox generateSW && serve -s ./build",
+    "build": "react-scripts build && npm i -g workbox-cli  && workbox generateSW ",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
