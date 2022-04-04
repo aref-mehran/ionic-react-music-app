@@ -40,12 +40,11 @@ const Home = () => {
   const animation = useRef(null);
 
   const doPlay = useCallback((track) => {
-    dispatch(playTrack(track));
-    if (track.downloadProgress == 100) {
-      dispatch(openPlayer());
+    if (track.downloadProgress < 100 && track.downloadProgress > 0) {
+      return;
     }
-
-
+    dispatch(playTrack(track));
+    dispatch(openPlayer());
   });
 
   useEffect(() => {
@@ -77,10 +76,8 @@ const Home = () => {
           {state.music.tracks.map((track, idx) => (
             <div key={track.title}>
               <IonItem onClick={() => doPlay(track)} button>
-
-              <IonIcon  size="large" color="primary" icon={musicalNote} />
-
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <IonIcon size="large" color="primary" icon={musicalNote} />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <CreateAnimation
                   ref={animation}
                   duration={1500}
@@ -94,7 +91,6 @@ const Home = () => {
                     { property: "opacity", fromValue: "1", toValue: "0.2" },
                   ]}
                 ></CreateAnimation>
-
                 <h2
                   style={
                     state.playing.index == track.id
@@ -107,21 +103,18 @@ const Home = () => {
                 >
                   {track.title}
                 </h2>
-
-                {state.music.tracks[idx].downloadProgress > 0 && state.music.tracks[idx].downloadProgress < 100 && (
-                  <div>
-                    &nbsp;در حال دانلود
-                    <IonSpinner name="crescent"></IonSpinner>
-                  </div>
-                )}
+                {state.music.tracks[idx].downloadProgress > 0 &&
+                  state.music.tracks[idx].downloadProgress < 100 && (
+                    <div>
+                      &nbsp;مشغول دانلود
+                      <IonSpinner name="crescent"></IonSpinner>
+                    </div>
+                  )}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {state.music.tracks[idx].downloadProgress == 100 && (
-                  <IonIcon  size="small"  icon={checkmarkDone} />
-
+                  <IonIcon size="small" icon={checkmarkDone} />
                 )}
-
               </IonItem>
-
             </div>
           ))}
         </IonList>

@@ -51,18 +51,21 @@ const TrackPreview = ({ tabBarTop }) => {
     <div
       style={{ top: `${tabBarTop}px` }}
       className="track-preview"
-      onClick={() => dispatch(openPlayer())}>
-      
+      onClick={() => {
+        if (track.downloadProgress != 100) {
+          return;
+        }
+        dispatch(openPlayer());
+      }}
+    >
       <TrackProgress playing={playing} track={track} />
 
       <div className="track-preview-wrapper">
         <div className="track-thumbnail">
           <IonThumbnail>
-          <IonIcon  size="large" color="primary" icon={musicalNote} />
-
+            <IonIcon size="large" color="primary" icon={musicalNote} />
           </IonThumbnail>
         </div>
-
 
         <div className="track-info">
           <span className="track-name">{track.title}</span>
@@ -79,7 +82,7 @@ const TrackPreview = ({ tabBarTop }) => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default TrackPreview;

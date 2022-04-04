@@ -62,18 +62,18 @@ const reducer = (state, action) => {
         return {
           ...state,
           ui: {
-            playerOpen: true
+            playerOpen: action.track.downloadProgress == 100,
           },
           user: {
             ...user,
-            recentTracks: [action.track, ...newRecentTracks]
+            recentTracks: [action.track, ...newRecentTracks],
           },
           playing: {
             ...playing,
             index,
             progress: 0,
-            paused: false
-          }
+            paused: false,
+          },
         };
       }
       return {
