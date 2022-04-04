@@ -19,20 +19,20 @@ import HiddenAudio from "./components/Audio";
 import TrackPlayer from "./components/TrackPlayer";
 
 const App = () => {
-    // var root;
-    // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    //     root="/";
-    // } else {
-    //     // production build code
-    // }
+  // var root;
+  // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  //     root="/";
+  // } else {
+  //     // production build code
+  // }
   return (
     <AppContextProvider>
       <IonApp>
-        <IonReactRouter >
+        <IonReactRouter>
           <IonPage>
             <IonRouterOutlet>
               <Route
-                
+                exact={true}
                 path="/"
                 render={() => <Redirect to={urls.APP_HOME} />}
               />

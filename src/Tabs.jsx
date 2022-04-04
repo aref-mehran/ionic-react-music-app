@@ -11,7 +11,7 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonTabs
+  IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
@@ -21,7 +21,7 @@ import {
   homeSharp,
   informationCircle,
   person,
-  search
+  search,
 } from "ionicons/icons";
 
 import { AppContextProvider, AppContext } from "./State";
@@ -42,18 +42,18 @@ const Tabs = () => {
       </TabBarSticky>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/" component={Music}  />
+          <Route path="/browse" component={Music} exact={true} />
           <Route path="/track/:trackId" component={Track} />
           <Route path="/search/track/:trackId" component={Track} />
           <Route
             path="/"
-            render={() => <Redirect to="/" />}
-           
+            render={() => <Redirect to="/browse" />}
+            exact={true}
           />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
-          {/* <IonTabButton tab="" href="/">
+          {/* <IonTabButton tab="browse" href="/browse">
           <IonIcon icon={home} />
           <IonLabel>Home</IonLabel>
         </IonTabButton>
